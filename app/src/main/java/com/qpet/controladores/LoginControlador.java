@@ -1,4 +1,4 @@
-package com.qpet;
+package com.qpet.controladores;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -13,22 +13,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.List;
+import com.qpet.Controller;
+import com.qpet.UsuarioModel;
 
 public class LoginControlador {
 
     Controller cont;
-    Usuario user;
+    UsuarioModel user;
 
     public LoginControlador(Controller controller) {
         this.cont = controller;
-        this.user = new Usuario();
+        this.user = new UsuarioModel();
     }
 
     public void IniciarSesion(EditText correo, EditText password){
@@ -136,6 +134,7 @@ public class LoginControlador {
 
     public void verificarUsuario(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final String[] userId = new String[1];
 
         db.collection("Users").whereEqualTo("Correo Electronico", user.getCorreoElectronico())
                 .whereEqualTo("Password", user.getPassword())
@@ -146,8 +145,25 @@ public class LoginControlador {
                         if(task.isSuccessful()){
                             int size = task.getResult().size();
                             if(size > 0){
-                                cont.accederMain();
-                                cont.limpiarL();
+                                for(DocumentSnapshot document : task.getResult().getDocuments()){
+                                    userId[0] = document.getId();
+                                }
+                                cont.mensajeL(userId[0]);
+                                db.collection("DatosUsuario").document(userId[0]).get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            DocumentSnapshot userDoc = task.getResult();
+                                            if(userDoc.exists()){
+                                                cont.accederMain();
+                                                cont.limpiarL();
+                                            }else {
+                                                cont.mensajeL("ActivityIngresarDatosNuevoUsuario");
+                                            }
+                                        }
+                                    }
+                                });
                             }else {
                                 cont.mensajeL("Correo electrónico o contraseña incorrecto");
                             }

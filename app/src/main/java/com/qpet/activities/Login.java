@@ -1,4 +1,4 @@
-package com.qpet;
+package com.qpet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.time.Instant;
+import com.qpet.Controller;
+import com.qpet.R;
 
 public class Login extends AppCompatActivity {
 

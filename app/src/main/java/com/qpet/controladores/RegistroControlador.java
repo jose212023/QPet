@@ -1,4 +1,4 @@
-package com.qpet;
+package com.qpet.controladores;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -11,9 +11,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.qpet.Controller;
+import com.qpet.UsuarioModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,26 +23,26 @@ import java.util.UUID;
 
 public class RegistroControlador {
     Controller cont;
-    Usuario usuario;
+    UsuarioModel usuarioModel;
 
     public RegistroControlador(Controller controller) {
         this.cont = controller;
-        this.usuario = new Usuario();
+        this.usuarioModel = new UsuarioModel();
     }
 
     public void Registrar(EditText correo, EditText password){
-        usuario.setCorreoElectronico(correo.getText().toString().trim());
-        usuario.setPassword(password.getText().toString());
+        usuarioModel.setCorreoElectronico(correo.getText().toString().trim());
+        usuarioModel.setPassword(password.getText().toString());
 
-        if(usuario.getCorreoElectronico().isEmpty() && usuario.getPassword().isEmpty()){
+        if(usuarioModel.getCorreoElectronico().isEmpty() && usuarioModel.getPassword().isEmpty()){
             cont.mensajeR("Correo Electronico y Contraseña Necesarios.");
-        }else if (usuario.getCorreoElectronico().isEmpty()){
+        }else if (usuarioModel.getCorreoElectronico().isEmpty()){
             cont.mensajeR("Correo Electronico Necesario.");
-        } else if (usuario.getPassword().isEmpty()) {
+        } else if (usuarioModel.getPassword().isEmpty()) {
             cont.mensajeR("Contraseña Necesaria.");
-        }else if (!Patterns.EMAIL_ADDRESS.matcher(usuario.getCorreoElectronico()).matches()){
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(usuarioModel.getCorreoElectronico()).matches()){
             cont.mensajeR("Correo Electronico Invalido");
-        } else if (Patterns.EMAIL_ADDRESS.matcher(usuario.getCorreoElectronico()).matches()) {
+        } else if (Patterns.EMAIL_ADDRESS.matcher(usuarioModel.getCorreoElectronico()).matches()) {
             Log.d("EXITO", "Todos los campos son correctos.");
             autenticar();
         }
@@ -49,7 +50,7 @@ public class RegistroControlador {
     }
 
     public void autenticar(){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuario.getCorreoElectronico(), usuario.getPassword())
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuarioModel.getCorreoElectronico(), usuarioModel.getPassword())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -65,7 +66,7 @@ public class RegistroControlador {
     }
 
     public void enviarCorreoDeValidacion() {
-        FirebaseAuth.getInstance().fetchSignInMethodsForEmail(usuario.getCorreoElectronico())
+        FirebaseAuth.getInstance().fetchSignInMethodsForEmail(usuarioModel.getCorreoElectronico())
                 .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                     @Override
                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
@@ -75,7 +76,7 @@ public class RegistroControlador {
                             if (signInMethods != null && !signInMethods.isEmpty()) {
                                 cont.mensajeR("El correo electrónico ya está registrado");
                             } else {
-                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuario.getCorreoElectronico(), usuario.getPassword())
+                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(usuarioModel.getCorreoElectronico(), usuarioModel.getPassword())
                                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -101,8 +102,8 @@ public class RegistroControlador {
         String id = UUID.randomUUID().toString();
         Map<String, Object> users = new HashMap<>();
         users.put("Id",id);
-        users.put("Correo Electronico", usuario.getCorreoElectronico());
-        users.put("Password", usuario.getPassword());
+        users.put("Correo Electronico", usuarioModel.getCorreoElectronico());
+        users.put("Password", usuarioModel.getPassword());
         users.put("Estado", estado);
 
         db.collection("Users").document(id).set(users).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -2,6 +2,11 @@ package com.qpet;
 
 import android.widget.EditText;
 
+import com.qpet.activities.Login;
+import com.qpet.activities.Registro;
+import com.qpet.controladores.LoginControlador;
+import com.qpet.controladores.RegistroControlador;
+
 public class Controller {
     Registro reg;
     Login log;

@@ -1,6 +1,6 @@
 package com.qpet;
 
-public class Usuario {
+public class UsuarioModel {
     private String correoElectronico;
     private String password;
     private boolean correoValidado;
