@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "763074251117",
+    "project_id": "adopcion-de-macotas",
+    "storage_bucket": "adopcion-de-macotas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763074251117:android:f4fcfe263bdcb4303d7264",
+        "android_client_info": {
+          "package_name": "com.qpet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763074251117-tkri9sqljlujvj89qr6a7hrlupteg9sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEDO3CMKha4KyQqP0lbRC53eHPjxHJP0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763074251117-tkri9sqljlujvj89qr6a7hrlupteg9sc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
