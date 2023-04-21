@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.qpet.Controller;
+import com.qpet.controladores.Controller;
 import com.qpet.R;
 
 public class Registro extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        cont = new Controller(this, null);
+        cont = new Controller(this, null, null);
 
         txtCorreo = (EditText) findViewById(R.id.editTextCorreoR);
         txtPassword = (EditText) findViewById(R.id.editTextPasswordR);

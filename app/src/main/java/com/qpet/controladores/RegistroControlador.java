@@ -13,8 +13,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.qpet.Controller;
-import com.qpet.UsuarioModel;
+import com.qpet.models.UsuarioModel;
 
 import java.util.HashMap;
 import java.util.List;

@@ -16,8 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.qpet.Controller;
-import com.qpet.UsuarioModel;
+import com.qpet.models.UsuarioModel;
 
 public class LoginControlador {
 
@@ -148,8 +147,7 @@ public class LoginControlador {
                                 for(DocumentSnapshot document : task.getResult().getDocuments()){
                                     userId[0] = document.getId();
                                 }
-                                cont.mensajeL(userId[0]);
-                                db.collection("DatosUsuario").document(userId[0]).get()
+                                db.collection("DataUser").document(userId[0]).get()
                                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -159,7 +157,8 @@ public class LoginControlador {
                                                 cont.accederMain();
                                                 cont.limpiarL();
                                             }else {
-                                                cont.mensajeL("ActivityIngresarDatosNuevoUsuario");
+                                                cont.accederDatosNuevoUsuario(user.getCorreoElectronico());
+                                                cont.limpiarL();
                                             }
                                         }
                                     }

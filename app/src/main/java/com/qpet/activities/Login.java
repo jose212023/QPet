@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.qpet.Controller;
+import com.qpet.controladores.Controller;
 import com.qpet.R;
 
 public class Login extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        cont = new Controller(null, this);
+        cont = new Controller(null, this, null);
 
         txtCorreo = (EditText) findViewById(R.id.editTextCorreo);
         txtPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -50,17 +50,21 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
     public void accederMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
+    public void accederDatosNuevoUsuario(String correo){
+        Intent intent = new Intent(this, IngresarDatosNuevoUsuario.class);
+        intent.putExtra("Correo_Electronico", correo);
+        startActivity(intent);
+        finish();
+    }
     public void mensaje(String mensaje){
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
-
     public void limpiarL(){
         txtCorreo.setText("");
         txtPassword.setText("");
