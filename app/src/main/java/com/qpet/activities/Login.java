@@ -2,8 +2,11 @@ package com.qpet.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +17,7 @@ import com.qpet.R;
 
 public class Login extends AppCompatActivity {
 
+    private boolean sesionIniciada = false;
     Controller cont;
     EditText txtCorreo, txtPassword;
     Button iniciarSesion, registrarse;
@@ -23,7 +27,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        cont = new Controller(null, this, null);
+        SharedPreferences prefs = getSharedPreferences("MiAplicacionPrefs", Context.MODE_PRIVATE);
+        sesionIniciada = prefs.getBoolean("sesionIniciada", false);
+        if (sesionIniciada) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        cont = new Controller(null, this, null, null);
 
         txtCorreo = (EditText) findViewById(R.id.editTextCorreo);
         txtPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -50,8 +62,14 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    public void accederMain(){
+    public void accederMain(String correo){
+        SharedPreferences prefs = getSharedPreferences("MiAplicacionPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("sesionIniciada", true);
+        editor.apply();
+
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Correo", correo);
         startActivity(intent);
         finish();
     }

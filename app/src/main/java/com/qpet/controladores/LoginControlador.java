@@ -19,10 +19,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.qpet.models.UsuarioModel;
 
 public class LoginControlador {
-
     Controller cont;
     UsuarioModel user;
-
     public LoginControlador(Controller controller) {
         this.cont = controller;
         this.user = new UsuarioModel();
@@ -95,8 +93,7 @@ public class LoginControlador {
 
         db.collection("Users")
                 .whereEqualTo("Correo Electronico", user.getCorreoElectronico())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot querySnapshot) {
                         if (!querySnapshot.isEmpty()) {
@@ -121,8 +118,7 @@ public class LoginControlador {
                             Log.d("Error", "No se encontro un documento relacionado con el correo electronico.");
                         }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d("ERROR", e.getMessage());
@@ -154,7 +150,7 @@ public class LoginControlador {
                                         if(task.isSuccessful()){
                                             DocumentSnapshot userDoc = task.getResult();
                                             if(userDoc.exists()){
-                                                cont.accederMain();
+                                                cont.accederMain(user.getCorreoElectronico());
                                                 cont.limpiarL();
                                             }else {
                                                 cont.accederDatosNuevoUsuario(user.getCorreoElectronico());

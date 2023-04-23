@@ -1,15 +1,8 @@
 package com.qpet.activities;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -17,8 +10,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -26,11 +17,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.qpet.R;
 import com.qpet.controladores.Controller;
-import com.qpet.models.DatosUsuarioModel;
 
-import java.io.FileDescriptor;
 import java.io.IOException;
 
 public class IngresarDatosNuevoUsuario extends AppCompatActivity implements ActivityResultCallback<Uri>{
@@ -51,7 +45,7 @@ public class IngresarDatosNuevoUsuario extends AppCompatActivity implements Acti
         Intent intent = getIntent();
         correo = intent.getStringExtra("Correo_Electronico");
 
-        cont = new Controller(null, null, this);
+        cont = new Controller(null, null, this, null);
 
         userPhoto = (ImageView) findViewById(R.id.imageView_userPhoto);
 
@@ -136,9 +130,9 @@ public class IngresarDatosNuevoUsuario extends AppCompatActivity implements Acti
             }
         }
     }
-
-    public void accederMain(){
+    public void accederMain(String correo){
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Correo", correo);
         startActivity(intent);
         finish();
     }

@@ -23,7 +23,7 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        cont = new Controller(this, null, null);
+        cont = new Controller(this, null, null, null);
 
         txtCorreo = (EditText) findViewById(R.id.editTextCorreoR);
         txtPassword = (EditText) findViewById(R.id.editTextPasswordR);
