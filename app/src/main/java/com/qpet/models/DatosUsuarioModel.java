@@ -11,6 +11,15 @@ public class DatosUsuarioModel {
     private int userPhoneNumber;
     private int userCantidadMascotas;
     private String userCorreo;
+    private String userURLPhoto;
+
+    public String getUserURLPhoto() {
+        return userURLPhoto;
+    }
+
+    public void setUserURLPhoto(String userURLPhoto) {
+        this.userURLPhoto = userURLPhoto;
+    }
 
     public String getUserCorreo() {
         return userCorreo;

@@ -15,7 +15,6 @@ public class Controller {
     Registro reg;
     Login log;
     IngresarDatosNuevoUsuario dataNewUser;
-
     MainActivity mA;
     RegistroControlador rcont;
     LoginControlador lcont;
@@ -63,6 +62,7 @@ public class Controller {
         log.mensaje(mensaje);
     }
     public void mensajeDU(String mensaje){dataNewUser.mensaje(mensaje);}
+    public void mensajeMA(String mensaje){mA.mensaje(mensaje);}
     public void limpiarR(){
         reg.limpiarR();
     }

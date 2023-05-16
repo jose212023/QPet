@@ -12,8 +12,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.qpet.models.DatosUsuarioModel;
 
 import java.io.ByteArrayOutputStream;
@@ -71,6 +76,10 @@ public class DatosNuevoUsuarioControlador {
 
     public void gurdarDatosFirestore(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
         db.collection("Users")
                 .whereEqualTo("Correo Electronico", dataUser.getUserCorreo())
                 .get()
@@ -80,30 +89,43 @@ public class DatosNuevoUsuarioControlador {
                         if (!querySnapshot.isEmpty()) {
                             String id = querySnapshot.getDocuments().get(0).getId();
 
-                            Map<String, Object> datauser = new HashMap<>();
-                            datauser.put("Id Usuario",id);
-                            datauser.put("Fotografia", dataUser.getUserPhoto());
-                            datauser.put("Nombres", dataUser.getUserNombres());
-                            datauser.put("Apellidos", dataUser.getUserApellidos());
-                            datauser.put("Edad", dataUser.getUserEdad());
-                            datauser.put("Direccion", dataUser.getUserDireccion());
-                            datauser.put("Telefono", dataUser.getUserPhoneNumber());
-                            datauser.put("Cantida de Macotas", dataUser.getUserCantidadMascotas());
-                            datauser.put("Correo Electronico", dataUser.getUserCorreo());
+                            StorageReference imageRef = storageRef.child("images/" + currentUser.getUid() + "/" + id);
+                            UploadTask uploadTask = imageRef.putFile(dataUser.getUserPhoto());
+                            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            dataUser.setUserURLPhoto(uri.toString());
+                                            Map<String, Object> datauser = new HashMap<>();
+                                            datauser.put("Id Usuario", id);
+                                            datauser.put("URL Fotografia", dataUser.getUserURLPhoto());
+                                            datauser.put("Nombres", dataUser.getUserNombres());
+                                            datauser.put("Apellidos", dataUser.getUserApellidos());
+                                            datauser.put("Edad", dataUser.getUserEdad());
+                                            datauser.put("Direccion", dataUser.getUserDireccion());
+                                            datauser.put("Telefono", dataUser.getUserPhoneNumber());
+                                            datauser.put("Cantidad de Mascotas", dataUser.getUserCantidadMascotas());
+                                            datauser.put("Correo Electronico", dataUser.getUserCorreo());
 
-                            db.collection("DataUser").document(id).set(datauser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        cont.mensajeDU("Datos Guardados con Exito.");
-                                        cont.accederMain2(dataUser.getUserCorreo());
-                                    }
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    cont.mensajeDU("Error al Guardar Datos.");
-                                    Log.d("ERROR", e.getMessage());
+                                            db.collection("DataUser").document(id).set(datauser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        cont.mensajeDU("Datos Guardados con Exito.");
+                                                        cont.accederMain2(dataUser.getUserCorreo());
+                                                    }
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    cont.mensajeDU("Error al Guardar Datos.");
+                                                    Log.d("ERROR", e.getMessage());
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
                             });
 

@@ -1,6 +1,8 @@
 package com.qpet.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -131,6 +133,11 @@ public class IngresarDatosNuevoUsuario extends AppCompatActivity implements Acti
         }
     }
     public void accederMain(String correo){
+        SharedPreferences prefs = getSharedPreferences("MiAplicacionPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("sesionIniciada", true);
+        editor.apply();
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("Correo", correo);
         startActivity(intent);

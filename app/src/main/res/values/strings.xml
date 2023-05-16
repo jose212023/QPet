@@ -6,4 +6,70 @@
     <string name="navigation_drawer_close">Close</string>
 
     <string name="menu_inicio">Inicio</string>
+    <string name="menu_cuenta">Cuenta</string>
+    <string name="menu_publicaciones">Publicaciones</string>
+    <string name="menu_agregar_publicacion">Agregar Publicacion</string>
+    <string name="menu_editar_informacion_cuenta">Editar Informacion</string>
+    <string name="menu_editar_publicacion">Editar Publicacion</string>
+    <string name="log_out">Cerrar Sesion</string>
+
+    <string-array name="genero">
+        <item>Seleccionar</item>
+        <item>Macho</item>
+        <item>Hembra</item>
+    </string-array>
+
+    <string-array name="edad">
+        <item>Seleccionar</item>
+        <item>Años</item>
+        <item>Meses</item>
+    </string-array>
+
+    <string-array name="departamentos">
+        <item>Seleccionar</item>
+        <item>Petén</item>
+        <item>Izabal</item>
+        <item>Alta Verapaz</item>
+        <item>Quiché</item>
+        <item>Huehuetenango</item>
+        <item>Escuintla</item>
+        <item>San Marcos</item>
+        <item>Jutiapa</item>
+        <item>Baja Verapaz</item>
+        <item>Santa Rosa</item>
+        <item>Zacapa</item>
+        <item>Suchitepéquez</item>
+        <item>Chiquimula</item>
+        <item>Guatemala</item>
+        <item>Jalapa</item>
+        <item>Chimaltenango</item>
+        <item>Quetzaltenango</item>
+        <item>El Progreso</item>
+        <item>Retalhuleu</item>
+        <item>Sololá</item>
+        <item>Totonicapán</item>
+        <item>Sacatepéquez</item>
+    </string-array>
+
+    <string-array name="Petén">
+        <item>Seleccionar</item>
+        <item>Dolores</item>
+        <item>El Chal</item>
+        <item>Flores</item>
+        <item>La Libertad</item>
+        <item>Las Cruces</item>
+        <item>Melchor de Mencos</item>
+        <item>Poptún</item>
+        <item>San Benito</item>
+        <item>San Francisco</item>
+        <item>San José</item>
+        <item>San Luis</item>
+        <item>Santa Ana</item>
+        <item>Sayaxché</item>
+    </string-array>
+
+    <string-array name="default_municipios">
+        <item>Seleccionar</item>
+    </string-array>
+
 </resources>

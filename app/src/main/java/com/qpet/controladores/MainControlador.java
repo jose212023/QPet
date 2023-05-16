@@ -1,5 +1,8 @@
 package com.qpet.controladores;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
@@ -23,36 +26,15 @@ import com.qpet.models.DatosUsuarioModel;
 public class MainControlador {
     Controller cont;
     DatosUsuarioModel dataUser;
-
     public MainControlador(Controller controller){
         this.cont = controller;
         this.dataUser = new DatosUsuarioModel();
     }
 
     public void cargarDatos(ImageView userPhoto, TextView nombres, TextView apellidos, TextView correo){
-        if(obtenerDatosFS() == true){
-            nombres.setText(dataUser.getUserNombres());
-            apellidos.setText(dataUser.getUserApellidos());
-            correo.setText(dataUser.getUserCorreo());
-
-            Log.d("Datos: ", dataUser.getUserNombres() +
-                    dataUser.getUserApellidos() +
-                    dataUser.getUserCorreo());
-
-            if (dataUser.getUserPhoto() != null) {
-                Glide.with(cont.mA)
-                        .load(dataUser.getUserPhoto())
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(userPhoto);
-            }
-        }
-    }
-
-    public boolean obtenerDatosFS(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final boolean[] value = {false};
 
         if (currentUser != null) {
             dataUser.setUserCorreo(currentUser.getEmail());
@@ -64,7 +46,6 @@ public class MainControlador {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
                             String id = queryDocumentSnapshots.getDocuments().get(0).getId();
-
                             db.collection("DataUser").document(id)
                                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
@@ -74,9 +55,37 @@ public class MainControlador {
                                                 if (document.exists()) {
                                                     dataUser.setUserNombres(document.getString("Nombres"));
                                                     dataUser.setUserApellidos(document.getString("Apellidos"));
-                                                    dataUser.setUserPhoto(Uri.parse(document.getString("Fotografia")));
+                                                    dataUser.setUserURLPhoto(document.getString("URL Fotografia"));
                                                     dataUser.setUserCorreo(document.getString("Correo Electronico"));
-                                                    value[0] = true;
+                                                    dataUser.setUserEdad(document.getLong("Edad").intValue());
+                                                    dataUser.setUserDireccion(document.getString("Direccion"));
+                                                    dataUser.setUserPhoneNumber(document.getLong("Telefono").intValue());
+                                                    dataUser.setUserCantidadMascotas(document.getLong("Cantidad de Mascotas").intValue());
+
+                                                    SharedPreferences preferences = cont.mA.getSharedPreferences("Datos_Usuario", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                    editor.putString("Id", id);
+                                                    editor.putString("URLFoto", dataUser.getUserURLPhoto());
+                                                    editor.putString("Nombres", dataUser.getUserNombres());
+                                                    editor.putString("Apellidos", dataUser.getUserApellidos());
+                                                    editor.putInt("Edad", dataUser.getUserEdad());
+                                                    editor.putString("Direccion", dataUser.getUserDireccion());
+                                                    editor.putInt("Telefono", dataUser.getUserPhoneNumber());
+                                                    editor.putInt("NumMascotas", dataUser.getUserCantidadMascotas());
+                                                    editor.putString("Correo", dataUser.getUserCorreo());
+                                                    editor.apply();
+
+                                                    nombres.setText(dataUser.getUserNombres());
+                                                    apellidos.setText(dataUser.getUserApellidos());
+                                                    correo.setText(dataUser.getUserCorreo());
+
+                                                    if (dataUser.getUserURLPhoto() != null) {
+                                                        Glide.with(cont.mA.getApplicationContext())
+                                                                .load(Uri.parse(dataUser.getUserURLPhoto()))
+                                                                .apply(RequestOptions.circleCropTransform())
+                                                                .into(userPhoto);
+                                                    }
+
                                                 }
                                             } else {
                                                 Log.d("Error", "Error getting document: ", task.getException());
@@ -96,7 +105,6 @@ public class MainControlador {
                         Log.d("ERROR", e.getMessage());
                     }
                 });
-        return value[0];
     }
 
 }

@@ -11,4 +11,40 @@
         android:label="@string/menu_inicio"
         tools:layout="@layout/fragment_inicio" />
 
+    <fragment
+        android:id="@+id/nav_cuenta"
+        android:name="com.qpet.cuenta.CuentaFragment"
+        android:label="@string/menu_cuenta"
+        tools:layout="@layout/fragment_cuenta" />
+
+    <fragment
+        android:id="@+id/nave_publicaciones"
+        android:name="com.qpet.publicaciones.MisPublicacionesFragment"
+        android:label="@string/menu_publicaciones"
+        tools:layout="@layout/fragment_mis_publicaciones" />
+
+    <fragment
+        android:id="@+id/nave_agregar_publicacion"
+        android:name="com.qpet.agregar.AgregarPublicacionFragment"
+        android:label="@string/menu_agregar_publicacion"
+        tools:layout="@layout/fragment_agregar_publicacion" />
+
+    <fragment
+        android:id="@+id/nave_editar_informacion_cuenta"
+        android:name="com.qpet.editar.EditarInfoFragment"
+        android:label="@string/menu_editar_informacion_cuenta"
+        tools:layout="@layout/fragment_editar_info" />
+
+    <fragment
+        android:id="@+id/nav_editar_publicacion"
+        android:name="com.qpet.editar_publicacion.EditarPublicacionFragment"
+        android:label="@string/menu_editar_publicacion"
+        tools:layout="@layout/fragment_editar_publicacion" />
+
+    <action
+        android:id="@+id/action_logout"
+        app:destination="@id/nav_inicio"
+        app:popUpTo="@id/nav_inicio"
+        app:popUpToInclusive="true" />
+
 </navigation>
