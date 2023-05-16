@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyHintTextAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">24dp</item>
+    </style>
+    <style name="MyTextAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="SpinnerFrame">
+        <item name="android:background">@drawable/spinner_background</item>
+    </style>
+</resources>
