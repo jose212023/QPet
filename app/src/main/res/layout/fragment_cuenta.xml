@@ -64,7 +64,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
@@ -100,7 +101,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
@@ -136,7 +138,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
@@ -172,7 +175,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
@@ -208,7 +212,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
@@ -244,7 +249,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"
@@ -280,7 +286,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginRight="5dp"
-                android:padding="2dp"/>
+                android:padding="2dp"
+                android:textColor="@color/black"/>
 
             <View
                 android:layout_width="match_parent"

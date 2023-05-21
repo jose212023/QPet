@@ -44,6 +44,8 @@ public class IngresarDatosNuevoUsuario extends AppCompatActivity implements Acti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingresar_datos_nuevo_usuario);
 
+        getSupportActionBar().setTitle("Registrar Datos");
+
         Intent intent = getIntent();
         correo = intent.getStringExtra("Correo_Electronico");
 

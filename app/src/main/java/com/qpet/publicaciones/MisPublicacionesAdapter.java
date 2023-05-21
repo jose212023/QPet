@@ -83,9 +83,6 @@ public class MisPublicacionesAdapter extends RecyclerView.Adapter<MisPublicacion
                                     misPublicacionesViewModel.eliminar(publicacion, context);
                                 }
                                 return true;
-                            case R.id.mark_as_adopted:
-                                // Lógica para marcar como adoptado la publicación
-                                return true;
                             default:
                                 return false;
                         }

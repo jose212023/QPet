@@ -40,7 +40,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:text="Registrarse" />
+            android:text="Registrarse"/>
 
         <Button
             android:id="@+id/btnRegresarR"
@@ -49,6 +49,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:text="Regresar" />
+            android:text="Regresar"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

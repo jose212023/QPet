@@ -27,6 +27,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().setTitle("Iniciar Sesion");
+
         SharedPreferences prefs = getSharedPreferences("MiAplicacionPrefs", Context.MODE_PRIVATE);
         sesionIniciada = prefs.getBoolean("sesionIniciada", false);
         if (sesionIniciada) {

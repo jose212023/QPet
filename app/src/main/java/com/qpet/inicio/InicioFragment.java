@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.storage.StorageReference;
 import com.qpet.R;
 import com.qpet.databinding.FragmentInicioBinding;
 
@@ -62,8 +63,7 @@ public class InicioFragment extends Fragment {
 
         InicioAdapter.OnContactarClickListener contactarClickListener = new InicioAdapter.OnContactarClickListener() {
             @Override
-            public void onContactarClick(String phoneNumber, InicioModel publicacion) {
-                String message = "¡Hola! Estoy interesado/a en tu publicación.";
+            public void onContactarClick(String phoneNumber, String message) {
                 sendWhatsAppMessage(phoneNumber, message);
             }
         };
@@ -76,7 +76,7 @@ public class InicioFragment extends Fragment {
 
     private void sendWhatsAppMessage(String phoneNumber, String message) {
         try {
-            Uri uri = Uri.parse("https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + Uri.encode(message));
+            Uri uri = Uri.parse("https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + message);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             requireContext().startActivity(intent);
         } catch (ActivityNotFoundException e) {

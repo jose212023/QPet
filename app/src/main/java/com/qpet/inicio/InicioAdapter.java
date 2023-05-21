@@ -2,6 +2,7 @@ package com.qpet.inicio;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.qpet.R;
 
 import java.util.List;
@@ -52,9 +55,8 @@ public class InicioAdapter extends RecyclerView.Adapter<InicioAdapter.ViewHolder
             public void onClick(View view) {
                 String phoneNumber = inicioModelList.get(holder.getAdapterPosition()).getTelefono();
                 InicioModel publicacion = inicioModelList.get(holder.getAdapterPosition());
-                Uri imagenUri = Uri.parse(publicacion.getURLFotoMascota());
-                String message = "¡Hola! Estoy interesado/a en tu publicación.";
-                contactarClickListener.onContactarClick(phoneNumber, message, imagenUri);
+                String message = "¡Hola! Estoy interesado/a en una de tus publicaciones en QPet.";
+                contactarClickListener.onContactarClick(phoneNumber, message);
             }
         });
     }
@@ -83,6 +85,6 @@ public class InicioAdapter extends RecyclerView.Adapter<InicioAdapter.ViewHolder
     }
 
     public interface OnContactarClickListener {
-        void onContactarClick(String phoneNumber, String message, Uri imageUri);
+        void onContactarClick(String phoneNumber, String message);
     }
 }

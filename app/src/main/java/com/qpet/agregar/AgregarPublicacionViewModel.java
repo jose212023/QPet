@@ -121,10 +121,94 @@ public class AgregarPublicacionViewModel extends ViewModel {
 
     private int obtenerMunicipiosArrayId(String departamento) {
         int municipiosArrayId = 0;
-        switch (departamento) {
+        switch (departamento.replaceAll("\\s+", "")) {
             case "Petén":
                 municipiosArrayId = R.array.Petén;
-            break;
+                break;
+
+            case "Izabal":
+                municipiosArrayId = R.array.Izabal;
+                break;
+
+            case "AltaVerapaz":
+                municipiosArrayId = R.array.AltaVerapaz;
+                break;
+
+            case "Quiché":
+                municipiosArrayId = R.array.Quiché;
+                break;
+
+            case "Huehuetenango":
+                municipiosArrayId = R.array.Huehuetenango;
+                break;
+
+            case "Escuintla":
+                municipiosArrayId = R.array.Escuintla;
+                break;
+
+            case "SanMarcos":
+                municipiosArrayId = R.array.SanMarcos;
+                break;
+
+            case "Jutiapa":
+                municipiosArrayId = R.array.Jutiapa;
+                break;
+
+            case "BajaVerapaz":
+                municipiosArrayId = R.array.BajaVerapaz;
+                break;
+
+            case "SantaRosa":
+                municipiosArrayId = R.array.SantaRosa;
+                break;
+
+            case "Zacapa":
+                municipiosArrayId = R.array.Zacapa;
+                break;
+
+            case "Suchitepéquez":
+                municipiosArrayId = R.array.Suchitepéquez;
+                break;
+
+            case "Chiquimula":
+                municipiosArrayId = R.array.Chiquimula;
+                break;
+
+            case "Guatemala":
+                municipiosArrayId = R.array.Guatemala;
+                break;
+
+            case "Jalapa":
+                municipiosArrayId = R.array.Jalapa;
+                break;
+
+            case "Chimaltenango":
+                municipiosArrayId = R.array.Chimaltenango;
+                break;
+
+            case "Quetzaltenango":
+                municipiosArrayId = R.array.Quetzaltenango;
+                break;
+
+            case "ElProgreso":
+                municipiosArrayId = R.array.ElProgreso;
+                break;
+
+            case "Retalhuleu":
+                municipiosArrayId = R.array.Retalhuleu;
+                break;
+
+            case "Sololá":
+                municipiosArrayId = R.array.Sololá;
+                break;
+
+            case "Totonicapán":
+                municipiosArrayId = R.array.Totonicapán;
+                break;
+
+            case "Sacatepéquez":
+                municipiosArrayId = R.array.Sacatepéquez;
+                break;
 
             default:
                 municipiosArrayId = R.array.default_municipios;

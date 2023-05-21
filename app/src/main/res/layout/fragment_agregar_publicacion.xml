@@ -230,7 +230,7 @@
 
             <Spinner
                 android:id="@+id/spinnerMunicipio"
-                android:layout_width="225dp"
+                android:layout_width="265dp"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -293,13 +293,21 @@
             android:layout_below="@id/txtTexto"
             android:layout_margin="5dp">
 
-            <ImageView
-                android:id="@+id/imageView_fotoMascota"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                tools:src="@tools:sample/avatars" />
+                android:background="@drawable/square_border"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="2dp">
+
+                <ImageView
+                    android:id="@+id/imageView_fotoMascota"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    tools:src="@tools:sample/avatars" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
